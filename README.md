@@ -85,3 +85,39 @@ Send the repository link via email to: **f.mori@sara.it**
 > **🧠 For larger and more complex projects, why is it discouraged to use web-exposed objects (e.g., `? extends GenericRequest`, `? extends GenericResponse`) within the Service layer?**
 
 Please include a brief answer to this question in your submission email.
+
+---
+
+## 🤖 Bonus (Optional) — AI-Assisted Development
+
+> This task is completely optional and does not affect the base evaluation of the exercise.
+
+Try to solve one or more of the previous tasks using an agentic AI assistant, such as:
+- [Claude Code](https://claude.ai/code)
+- [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+- Other similar tools (Copilot Workspace, Cursor, etc.)
+
+### 📁 What to Submit
+
+Add an `/ai-assisted/` folder to your repository containing one or more Markdown files documenting the experience. The files should cover the following aspects:
+
+#### 1. `pre-analysis.md` — Pre-Exercise Analysis
+- How you presented the project context to the AI (repository, README, existing code)
+- What information you provided before starting
+- Any limitations encountered in the tool's initial understanding of the codebase
+
+#### 2. `plan.md` — Change Plan
+- The intervention plan generated or co-built with the AI
+- How you iterated on the plan (refinement prompts, corrections, intermediate steps)
+- Which tasks you fully delegated to the AI and which you handled manually
+
+#### 3. `report.md` — Final Report
+- **Key prompts used**: summary or excerpt of the most significant prompts
+- **Difficulties encountered**: generated errors, hallucinations, code that failed to compile, lost context
+- **Approaches adopted**: how you guided the tool toward the correct solution
+- **Personal assessment**: how much did it speed up your work? Where did it fall short?
+
+### 📌 Notes
+- The AI is not required to have completed the tasks correctly — the goal is to document the *process*, not the outcome.
+- Honest criticism is appreciated: a report that describes the tool's failures is more valuable than one that only highlights its successes.
+- If you used multiple tools, you may create separate subfolders (`/ai-assisted/claude-code/`, `/ai-assisted/gemini-cli/`, etc.)
