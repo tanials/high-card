@@ -7,10 +7,16 @@ import lombok.Getter;
 public class GenericException extends Exception {
 
     public final static StatusDTO GENERIC_ERROR = new StatusDTO();
+    public final static StatusDTO NOT_FOUND = new StatusDTO();
 
     static {
         GENERIC_ERROR.setCode(500);
         GENERIC_ERROR.setMessage("Generic error");
+    }
+
+    static {
+        NOT_FOUND.setCode(404);
+        NOT_FOUND.setMessage("Not Found");
     }
 
     private final StatusDTO status;
