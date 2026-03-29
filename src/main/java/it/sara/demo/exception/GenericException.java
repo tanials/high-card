@@ -4,7 +4,7 @@ import it.sara.demo.dto.StatusDTO;
 import lombok.Getter;
 
 @Getter
-public class GenericException extends Exception {
+public class GenericException extends RuntimeException {
 
     public final static StatusDTO GENERIC_ERROR = new StatusDTO();
     public final static StatusDTO NOT_FOUND = new StatusDTO();
@@ -12,12 +12,10 @@ public class GenericException extends Exception {
     static {
         GENERIC_ERROR.setCode(500);
         GENERIC_ERROR.setMessage("Generic error");
-    }
-
-    static {
         NOT_FOUND.setCode(404);
         NOT_FOUND.setMessage("Not Found");
     }
+
 
     private final StatusDTO status;
 

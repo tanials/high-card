@@ -12,7 +12,7 @@ public class UserValidation {
     @Autowired
     private StringUtil stringUtil;
 
-    public void validateUserData(CriteriaAddUser criteria) throws GenericException {
+    public void validateUserData(CriteriaAddUser criteria) {
 
         if (stringUtil.isNullOrEmpty(criteria.getFirstName())) {
             throw new GenericException(400, "First name is required");
