@@ -1,6 +1,5 @@
 package it.sara.demo.web.user;
 
-import it.sara.demo.exception.GenericException;
 import it.sara.demo.service.user.UserService;
 import it.sara.demo.service.user.criteria.CriteriaAddUser;
 import it.sara.demo.service.user.criteria.CriteriaGetUsers;
@@ -13,9 +12,9 @@ import it.sara.demo.web.user.request.GetUsersRequest;
 import it.sara.demo.web.user.response.GetUsersResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,15 +30,15 @@ public class UserController {
     @Autowired
     private GetUserAssembler getUserAssembler;
 
-    @RequestMapping(value = {"/v1/user"}, method = RequestMethod.PUT)
-    public ResponseEntity<GenericResponse> addUser(@RequestBody AddUserRequest request)  {
+    @PostMapping(value = {"/v1/user"})
+    public ResponseEntity<GenericResponse> addUser(@RequestBody AddUserRequest request) {
         CriteriaAddUser criteria = addUserAssembler.toCriteria(request);
         userService.addUser(criteria);
         return ResponseEntity.ok(GenericResponse.success("User added."));
     }
 
-    @RequestMapping(value = {"/v1/user"}, method = RequestMethod.POST)
-    public ResponseEntity<GetUsersResponse> getUsers(@RequestBody GetUsersRequest request){
+    @PostMapping(value = {"/v1/users"})
+    public ResponseEntity<GetUsersResponse> getUsers(@RequestBody GetUsersRequest request) {
         CriteriaGetUsers criteriaGetUsers = getUserAssembler.toCriteria(request);
         GetUsersResult result = userService.getUsers(criteriaGetUsers);
         return ResponseEntity.ok(getUserAssembler.toResponse(result));
