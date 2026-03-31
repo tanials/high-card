@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserValidation {
 
-    @Autowired
-    private StringUtil stringUtil;
+
+    private final StringUtil stringUtil;
+
+    public UserValidation(StringUtil stringUtil) {
+        this.stringUtil = stringUtil;
+    }
 
     public void validateUserData(CriteriaAddUser criteria) {
 

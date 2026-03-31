@@ -1,8 +1,11 @@
 package it.sara.demo.service.util;
 
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
@@ -32,21 +35,24 @@ public class JwtUtil {
         Instant expiry = Instant.now().plus(Duration.ofMinutes(expirationMinutes));
 
         return Jwts.builder()
-            .setSubject(username)
-            .setIssuer(issuer)
+            .subject(username)
+            .issuer(issuer)
+            .issuedAt(Date.from(Instant.now()))
             .claim("role", role)
-            .setExpiration(Date.from(expiry))
+            .expiration(Date.from(expiry))
             .signWith(secretKey)
             .compact();
     }
 
     public Claims validateToken(String token) {
-        return Jwts.parserBuilder()
-            .setSigningKey(secretKey)
+        return Jwts.parser()
+            .verifyWith(secretKey)
             .requireIssuer(issuer)
             .build()
-            .parseClaimsJws(token)
-            .getBody();
+            .parseSignedClaims(token)
+            .getPayload();
     }
 
+
 }
+

@@ -8,6 +8,7 @@ import it.sara.demo.service.database.model.User;
 import it.sara.demo.service.user.UserService;
 import it.sara.demo.service.user.criteria.CriteriaAddUser;
 import it.sara.demo.service.user.criteria.CriteriaGetUsers;
+import it.sara.demo.service.user.criteria.CriteriaGetUsers.OrderType;
 import it.sara.demo.service.user.result.AddUserResult;
 import it.sara.demo.service.user.result.GetUsersResult;
 import it.sara.demo.service.util.UserValidation;
@@ -61,7 +62,6 @@ public class UserServiceImpl implements UserService {
 
         userValidation.validateGetUsersCriteria(criteriaGetUsers);
 
-        // 2. PRENDO DATI (simula DB)
         List<User> users = userRepository.getAll();
 
         if (CollectionUtils.isEmpty(users)) {
@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
 
         int total = users.size();
 
-        // 6. PAGINATION
         int start = Math.min(criteriaGetUsers.getOffset(), total);
         int end = Math.min(start + criteriaGetUsers.getLimit(), total);
 
@@ -100,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private Comparator<User> getComparator(CriteriaGetUsers.OrderType order) {
+    private Comparator<User> getComparator(OrderType order) {
 
         if (order == null) {
             return Comparator.comparing(User::getFirstName);
