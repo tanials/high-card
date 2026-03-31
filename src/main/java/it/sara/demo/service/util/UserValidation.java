@@ -3,7 +3,6 @@ package it.sara.demo.service.util;
 import it.sara.demo.exception.GenericException;
 import it.sara.demo.service.user.criteria.CriteriaAddUser;
 import it.sara.demo.service.user.criteria.CriteriaGetUsers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -60,6 +59,7 @@ public class UserValidation {
         return email != null && email.matches(emailRegex);
     }
 
+
     public boolean isPhoneNumberValid(String phoneNumber) {
         String regex = "^(?:\\+39|0039)?3\\d{9}$";
         return phoneNumber != null && phoneNumber.matches(regex);
@@ -68,6 +68,7 @@ public class UserValidation {
     public boolean isNameValid(String value) {
         return value != null && value.matches("^[a-zA-Z ]+$");
     }
+
 
     public boolean containsSqlInjectionRisk(String value) {
         if (value == null) return false;
@@ -82,6 +83,7 @@ public class UserValidation {
             lower.contains(" or ") ||
             lower.contains(" and ");
     }
+
 
 
     public void validateGetUsersCriteria(CriteriaGetUsers criteriaGetUsers) throws GenericException {

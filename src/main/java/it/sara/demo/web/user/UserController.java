@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller REST per la gestione degli utenti.
+ * Espone endpoint per aggiungere un nuovo utente e per recuperare una lista di utenti in base a criteri specificati.
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -30,6 +34,12 @@ public class UserController {
     @Autowired
     private GetUserAssembler getUserAssembler;
 
+    /**
+     * Endpoint per aggiungere un nuovo utente.
+     *
+     * @param request La richiesta contenente i dati dell'utente da aggiungere.
+     * @return Una risposta generica con il risultato dell'operazione.
+     */
     @PostMapping(value = {"/v1/user"})
     public ResponseEntity<GenericResponse> addUser(@RequestBody AddUserRequest request) {
         CriteriaAddUser criteria = addUserAssembler.toCriteria(request);
@@ -37,6 +47,12 @@ public class UserController {
         return ResponseEntity.ok(GenericResponse.success("User added."));
     }
 
+    /**
+     * Endpoint per recuperare una lista di utenti in base a criteri specificati.
+     *
+     * @param request La richiesta contenente i criteri per recuperare gli utenti.
+     * @return Una risposta con la lista degli utenti e il totale.
+     */
     @PostMapping(value = {"/v1/users"})
     public ResponseEntity<GetUsersResponse> getUsers(@RequestBody GetUsersRequest request) {
         CriteriaGetUsers criteriaGetUsers = getUserAssembler.toCriteria(request);
