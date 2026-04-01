@@ -40,8 +40,7 @@ public class JwtUtil {
 
 
     /**
-     * Costruisce un'istanza di {@link JwtUtil} inizializzando i parametri
-     * necessari alla generazione e validazione dei token JWT.
+     * Costruisce un'istanza di {@link JwtUtil} inizializzando i parametri necessari alla generazione e validazione dei token JWT.
      *
      * @param secret la chiave segreta utilizzata per firmare i token
      * @param expirationMinutes la durata di validità dei token, espressa in minuti

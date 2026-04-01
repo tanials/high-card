@@ -12,8 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller REST per la gestione dell'autenticazione.
- * Espone un endpoint per il login, che accetta le credenziali dell'utente e restituisce un token di autenticazione se le credenziali sono valide.
+ * Controller REST responsabile della gestione delle operazioni di autenticazione.
+ *
+ * <p>Espone endpoint relativi all’autenticazione utente, tra cui:</p>
+ * <ul>
+ *     <li>Login con username e password</li>
+ *     <li>Generazione di un token JWT tramite {@link AuthenticationService}</li>
+ * </ul>
+ *
+ * <p>Gli endpoint sono prefissati con <b>/auth</b>.</p>
  */
 @RestController
 @RequestMapping("/auth")
@@ -23,10 +30,18 @@ public class AuthController {
     private AuthenticationService authenticationService;
 
     /**
-     * Endpoint per il login dell'utente.
+     * Endpoint REST per l’autenticazione di un utente tramite username e password.
      *
-     * @param request La richiesta contenente le credenziali dell'utente (username e password).
-     * @return Una risposta con un token di autenticazione se le credenziali sono valide, altrimenti una risposta di errore.
+     * <p>Il metodo esegue le seguenti operazioni:</p>
+     * <ul>
+     *     <li>Riceve una richiesta {@link LoginRequest} contenente le credenziali</li>
+     *     <li>Invoca {@link AuthenticationService#authenticateAndGenerateToken(String, String)}
+     *         per validare le credenziali e generare un token JWT</li>
+     *     <li>Restituisce il token all'interno di un {@link LoginResponse}</li>
+     * </ul>
+     *
+     * @param request le credenziali dell’utente (username e password)
+     * @return {@link ResponseEntity} contenente il token JWT in caso di autenticazione riuscita
      */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {

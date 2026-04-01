@@ -18,9 +18,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller REST per la gestione degli utenti.
- * Espone endpoint per aggiungere un nuovo utente e per recuperare una lista di utenti in base a criteri specificati.
+ * Controller REST responsabile della gestione delle operazioni sugli utenti.
+ *
+ * <p>Espone endpoint relativi a:</p>
+ * <ul>
+ *     <li>Creazione di un nuovo utente</li>
+ *     <li>Ricerca utenti con filtri e paginazione</li>
+ * </ul>
+ *
+ * <p>La classe utilizza:</p>
+ * <ul>
+ *     <li>{@link UserService} per eseguire la logica applicativa</li>
+ *     <li>{@link AddUserAssembler} per convertire le richieste di creazione</li>
+ *     <li>{@link GetUserAssembler} per convertire le richieste di ricerca</li>
+ * </ul>
+ *
+ * <p>Gli endpoint sono prefissati con <b>/user</b> e seguono la versione <b>v1</b>.</p>
  */
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -35,10 +50,17 @@ public class UserController {
     private GetUserAssembler getUserAssembler;
 
     /**
-     * Endpoint per aggiungere un nuovo utente.
+     * Endpoint REST per la creazione di un nuovo utente.
      *
-     * @param request La richiesta contenente i dati dell'utente da aggiungere.
-     * @return Una risposta generica con il risultato dell'operazione.
+     * <p>Il metodo esegue le seguenti operazioni:</p>
+     * <ul>
+     *     <li>Converte la richiesta {@link AddUserRequest} in {@link CriteriaAddUser} tramite {@link AddUserAssembler}</li>
+     *     <li>Invoca il servizio {@link UserService#addUser(CriteriaAddUser)}</li>
+     *     <li>Restituisce una risposta di successo generica tramite {@link GenericResponse}</li>
+     * </ul>
+     *
+     * @param request oggetto contenente i dati dell’utente da creare
+     * @return {@link ResponseEntity} con un messaggio di successo
      */
     @PostMapping(value = {"/v1/user"})
     public ResponseEntity<GenericResponse> addUser(@RequestBody AddUserRequest request) {
@@ -48,10 +70,17 @@ public class UserController {
     }
 
     /**
-     * Endpoint per recuperare una lista di utenti in base a criteri specificati.
+     * Endpoint REST per la ricerca degli utenti in base ai criteri specificati.
      *
-     * @param request La richiesta contenente i criteri per recuperare gli utenti.
-     * @return Una risposta con la lista degli utenti e il totale.
+     * <p>Il metodo esegue le seguenti operazioni:</p>
+     * <ul>
+     *     <li>Converte la richiesta {@link GetUsersRequest} in {@link CriteriaGetUsers} tramite {@link GetUserAssembler}</li>
+     *     <li>Richiede al servizio {@link UserService#getUsers(CriteriaGetUsers)} la lista filtrata</li>
+     *     <li>Converte il risultato in {@link GetUsersResponse}</li>
+     * </ul>
+     *
+     * @param request criteri di ricerca, ordinamento e paginazione
+     * @return {@link ResponseEntity} contenente la risposta formattata per il client
      */
     @PostMapping(value = {"/v1/users"})
     public ResponseEntity<GetUsersResponse> getUsers(@RequestBody GetUsersRequest request) {

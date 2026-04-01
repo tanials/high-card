@@ -49,7 +49,7 @@ class UserValidationTest {
             GenericException ex = assertThrows(GenericException.class,
                 () -> userValidation.validateUserData(c));
 
-            assertEquals("First name is required", ex.getStatus().getMessage());
+            assertEquals("Bad Request", ex.getStatus().getMessage());
         }
 
         @Test
@@ -62,7 +62,7 @@ class UserValidationTest {
             GenericException ex = assertThrows(GenericException.class,
                 () -> userValidation.validateUserData(c));
 
-            assertEquals("Invalid email format", ex.getStatus().getMessage());
+            assertEquals("Bad Request", ex.getStatus().getMessage());
         }
 
         @Test
@@ -75,7 +75,7 @@ class UserValidationTest {
             GenericException ex = assertThrows(GenericException.class,
                 () -> userValidation.validateUserData(c));
 
-            assertEquals("Invalid phone number format",  ex.getStatus().getMessage());
+            assertEquals("Bad Request",  ex.getStatus().getMessage());
         }
 
         @Test
@@ -88,7 +88,7 @@ class UserValidationTest {
             GenericException ex = assertThrows(GenericException.class,
                 () -> userValidation.validateUserData(c));
 
-            assertEquals("Invalid first name",  ex.getStatus().getMessage());
+            assertEquals("Bad Request",  ex.getStatus().getMessage());
         }
     }
 

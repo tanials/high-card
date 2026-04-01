@@ -98,7 +98,8 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(criteria.getPhoneNumber());
 
         if (!userRepository.save(user)) {
-            throw new GenericException(500, "Error saving user");
+            log.error("Error saving user: {}", user);
+            throw new GenericException(GenericException.GENERIC_ERROR);
         }
 
         return returnValue;
